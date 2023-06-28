@@ -64,13 +64,26 @@ function Header() {
 }
 
 function Menu() {
+    const pizzas = pizzaData.map((pizza , index) => {
+        return <Pizza key={index} photoName={pizza.photoName} name={pizza.name} ingredients={pizza.ingredients} price={pizza.price}/>
+    });
     return (
         <div className="menu">
             <h2>Our menu</h2>
-            <Pizza/>
-            <Pizza/>
-            <Pizza/>
-            <Pizza/>
+            <div className="pizzas">{pizzas}</div>
+        </div>
+    );
+}
+
+function Pizza(props) {
+    return (
+        <div className="pizza">
+            <img src={props.photoName} alt="image of Pizza"/>
+            <div>
+                <h3>{props.name}</h3>
+                <p>{props.ingredients}</p>
+                <span>{props.price}$</span>
+            </div>
         </div>
     );
 }
@@ -82,15 +95,7 @@ function Footer() {
     return <footer className="footer">{new Date().toLocaleTimeString()}. We are currently {hour>=12 && hour<=22 ? "open" : "close"}</footer>
 }
 
-function Pizza() {
-    return (
-        <div className="pizza">
-            <img src="pizzas/spinaci.jpg" alt="image of Pizza"/>
-            <h3>Pizza Spinaci</h3>
-            <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-        </div>
-    );
-}
+
 const el = document.getElementById("root");
 const root = ReactDOM.createRoot(el);
 root.render(<React.StrictMode><App/></React.StrictMode>);
